@@ -17,14 +17,24 @@ public final class Authenticator {
     // A user storage which stores <username, password>
     private final Map<String, String> usersStorage = new HashMap();
 
-    // An authentication token storage which stores <service_key, auth_token>.
+    // An authentication token storage which stores <auth_token, username>.
     private final Map<String, String> authorizationTokensStorage = new HashMap();
+    
+    //project users storage which stores <userProject, role>
+    private final Map<String, String> projectUsersRoleStorage = new HashMap();
 
     private Authenticator() {
         // The usersStorage pretty much represents a user table in the database
         usersStorage.put("username1", "passwordForUser1");
         usersStorage.put("username2", "passwordForUser2");
         usersStorage.put("username3", "passwordForUser3");
+        
+        projectUsersRoleStorage.put("username1Project1", "Master");
+        projectUsersRoleStorage.put("username2Project1", "Guest");
+        projectUsersRoleStorage.put("username2Project3", "Master");
+        projectUsersRoleStorage.put("username3Project3", "Master");
+        projectUsersRoleStorage.put("username1Project3", "Guest");
+        projectUsersRoleStorage.put("username3Project2", "Master");
     }
 
     public static Authenticator getInstance() {
@@ -90,5 +100,12 @@ public final class Authenticator {
         }
 
         throw new GeneralSecurityException("Invalid authorization token match.");
+    }
+
+    public String getUserRoleForProject(String project, String user) throws GeneralSecurityException{
+        if (projectUsersRoleStorage.containsKey(user + "" + project)) {
+            return projectUsersRoleStorage.get(user + "" + project);
+        }
+        throw new GeneralSecurityException("Not a participant in this project"); 
     }
 }
