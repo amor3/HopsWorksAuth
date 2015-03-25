@@ -22,9 +22,9 @@ public final class Authenticator {
 
     private Authenticator() {
         // The usersStorage pretty much represents a user table in the database
-        usersStorage.put("username1", "passwordForUser1");
-        usersStorage.put("username2", "passwordForUser2");
-        usersStorage.put("username3", "passwordForUser3");
+        usersStorage.put("username1", "password1");
+        usersStorage.put("username2", "password2");
+        usersStorage.put("username3", "password3");
     }
 
     public static Authenticator getInstance() {

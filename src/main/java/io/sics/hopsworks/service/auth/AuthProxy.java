@@ -28,18 +28,16 @@ public interface AuthProxy extends Serializable {
         @FormParam( "username" ) String username,
         @FormParam( "password" ) String password );
 
-    
     @GET
-    @Path( "demo-get-method" )
+    @Path( "getMethod" )
     @Produces( MediaType.APPLICATION_JSON )
     public Response demoGetMethod();
 
     @POST
-    @Path( "demo-post-method" )
+    @Path( "postMethod" )
     @Produces( MediaType.APPLICATION_JSON )
     public Response demoPostMethod();
-    
-    
+
     @POST
     @Path( "logout" )
     public Response logout(
